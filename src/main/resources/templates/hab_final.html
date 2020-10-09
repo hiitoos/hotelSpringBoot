@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>Eliysium - The Space Hotel &amp; Resort</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/img/core-img/favicon.png">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Hab Final</title>
+</head>
+<body>
+    <div class="col-12 col-md-6 col-lg-4 mt-5 px-5">
+      <div class="single-rooms-area wow fadeInUp" data-wow-delay="100ms">
+        <!-- Thumbnail -->
+
+        <div class="bg-thumbnail bg-img" th:style="'background-image: url(/img/bg-img/hab/' + ${habitacion.getTipoModel().getId()} + '.jpg)'"></div>
+        <!-- Price  -->
+        <p class="price-from-final" th:text="${habitacion.getTipoModel().getNombre()}"></p>
+        <!-- Rooms Text -->
+        <div class="rooms-text">
+            <div class="line"></div>
+            <!-- <h4 th:text="${habitacion.getTipoModel().getNombre()}"></h4> -->
+            <p th:text="${habitacion.getTipoModel().getDescripcion()}"></p>
+
+        </div>
+    
+      </div>
+   </div>
+   <!-- Book Room -->
+
+     <!-- ##### Book Now Area Start ##### -->
+     <div class="book-now-area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="book-now-form">
+                        <form method="get" th:action="@{/reservas/newReserva/}" modelAttribute="reserva">
+                            <!-- Form Group -->
+                            <div class="form-group">
+                                <label>Check In</label>
+                                    <input type="date" class="form-control" id="CheckIn" name="checkIn">
+                            </div>
+
+                            <!-- Form Group -->
+                            <div class="form-group">
+                                <label>Check Out</label>
+                                    <input type="date" class="form-control" id="CheckOut" name="checkOut">
+                            </div>
+                            <!-- Form Group -->
+                            <div class="form-group">
+                                <label for="adults">Adultos</label>
+                                <select class="form-control" id="adults" onchange="paxSum()">
+                                  <option value="1" selected>01</option>
+                                  <option value="2">02</option>
+                                  <option value="3">03</option>
+                                  <option value="4">04</option>
+                                  <option value="5">05</option>
+                                  <option value="6">06</option>
+                                </select>
+                            </div>
+
+                            <!-- Form Group -->
+                            <div class="form-group">
+                                <label for="kids">Niños</label>
+                                <select class="form-control" id="kids" onchange="paxSum()">
+                                  <option value="0" selected>00</option>
+                                  <option value="1">01</option>
+                                  <option value="2">02</option>
+                                  <option value="3">03</option>
+                                  <option value="4">04</option>
+                                  <option value="5">05</option>
+                                </select>
+                            </div>
+
+                            <!-- Button -->
+                            <button type="submit">Book Now</button>
+                            <input name="precioHab" th:value="${habitacion.precio}"></input><br>
+                            <input name="habId" th:value="${habitacion.id}"></input><br>
+                            <!-- falta label con precio total por noche
+                                falta que envíe el id_cliente -->
+                            <input name="username" sec:authorize="hasRole('USER')" th:value="${#authentication.getPrincipal().username}"></p><br>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Book Now Area End ##### -->
+  </body>
+</html>
