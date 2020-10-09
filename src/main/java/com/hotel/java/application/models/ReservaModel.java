@@ -79,11 +79,12 @@ public class ReservaModel {
     @Override
     public String toString() {
         return "ReservaModel{" +
-                "fechaIn=" + fechaIn +
+                "id=" + id +
+                ", fechaIn=" + fechaIn +
                 ", fechaOut=" + fechaOut +
                 ", precioTotal=" + precioTotal +
-                ", clienteModel=" + cliente +
-                ", habitacionModels=" + habitacion +
+                ", cliente=" + cliente +
+                ", habitacion=" + habitacion +
                 '}';
     }
 }

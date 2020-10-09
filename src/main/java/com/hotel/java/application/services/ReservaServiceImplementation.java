@@ -6,6 +6,7 @@ import com.hotel.java.application.domain.factories.HabitacionFactory;
 import com.hotel.java.application.domain.factories.ReservaFactory;
 import com.hotel.java.application.models.ReservaModel;
 import com.hotel.java.application.repositories.MasterRepository;
+import com.hotel.java.application.repositories.ReservaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,17 +14,17 @@ import java.util.List;
 
 @Service
 public class ReservaServiceImplementation implements ReservaService {
-    private final MasterRepository masterRepository;
+    private final ReservaRepository reservaRepository;
     private final ReservaFactory reservaFactory;
     private final ClienteFactory clienteFactory;
     private final HabitacionFactory habitacionFactory ;
 
     @Autowired
-    public ReservaServiceImplementation(MasterRepository masterRepository,
+    public ReservaServiceImplementation(ReservaRepository reservaRepository,
                                         ReservaFactory reservaFactory,
                                         ClienteFactory clienteFactory,
                                         HabitacionFactory habitacionFactory) {
-        this.masterRepository = masterRepository;
+        this.reservaRepository = reservaRepository;
         this.reservaFactory = reservaFactory;
         this.clienteFactory = clienteFactory;
         this.habitacionFactory = habitacionFactory;
@@ -31,13 +32,13 @@ public class ReservaServiceImplementation implements ReservaService {
 
     @Override
     public List<ReservaModel> listReservas() {
-        List<ReservaEntity> reservaEntities = (List<ReservaEntity>)(List<?>)this.masterRepository.listarTodo (ReservaEntity.class);
+        List<ReservaEntity> reservaEntities = this.reservaRepository.findAll();
         return this.reservaFactory.reservaListEntity2Model(reservaEntities);
     }
 
     @Override
     public ReservaModel listReservaById(long id) {
-        ReservaEntity reservaEntity = (ReservaEntity) this.masterRepository.listarById (id, ReservaEntity.class);
+        ReservaEntity reservaEntity = this.reservaRepository.findById (id).orElseThrow (RuntimeException::new);
         return this.reservaFactory.reservaEntity2Model (reservaEntity);
     }
 
@@ -52,9 +53,16 @@ public class ReservaServiceImplementation implements ReservaService {
                 this.habitacionFactory.habitacionModel2Entity (reservaModel.getHabitacion ())
         );
         switch (modo){
-            case "new": this.masterRepository.newObject (reservaEntity, true); break;
-            case "delete": this.masterRepository.newObject (reservaEntity, false);break;
-            case "update": this.masterRepository.newObject (reservaEntity, true);break;
+            case "new":
+            case "update": {
+                this.reservaRepository.save (reservaEntity);
+                this.reservaRepository.flush ();
+                break;
+            }
+            case "delete": {
+                this.reservaRepository.delete (reservaEntity);
+                break;
+            }
             default: System.out.println (
                     "Error de modo: ReservaImplementation -> operateReserva -> variable \"modo\" mal pasada"
                     );

@@ -5,62 +5,74 @@ import com.hotel.java.application.domain.entities.HabitacionEntity;
 import com.hotel.java.application.domain.factories.HabitacionFactory;
 //import com.hotel.java.application.domain.factories.ReservaFactory;
 import com.hotel.java.application.models.HabitacionModel;
+import com.hotel.java.application.repositories.HabitacionRepository;
 import com.hotel.java.application.repositories.MasterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class HabitacionServiceImplementation implements HabitacionService{
-    private final MasterRepository masterRepository;
+    private final HabitacionRepository habitacionRepository;
     private final HabitacionFactory habitacionFactory ;
     private List<HabitacionEntity> habitacionEntities;
     private List<HabitacionModel> habitacionModels;
     private HabitacionEntity habitacionEntity;
 
     @Autowired
-    public HabitacionServiceImplementation(MasterRepository masterRepository,
-
+    public HabitacionServiceImplementation(HabitacionRepository habitacionRepository,
                                         HabitacionFactory habitacionFactory) {
-        this.masterRepository = masterRepository;
+        this.habitacionRepository = habitacionRepository;
         this.habitacionFactory = habitacionFactory;
     }
 
     @Override
     public List<HabitacionModel> showAllHabitaciones() {
-        habitacionEntities = (List<HabitacionEntity>)(List<?>)this.masterRepository.listarTodo (HabitacionEntity.class);
+        habitacionEntities = this.habitacionRepository.findAll ();
         habitacionModels = this.habitacionFactory.habitacionListEntity2Model(habitacionEntities);
         return habitacionModels;
     }
 
     @Override
     public List<HabitacionModel> showHabitacionesByGuest(int numGuest) {
-        habitacionEntities = (List<HabitacionEntity>)(List<?>)this.masterRepository.listCampoGT (HabitacionEntity.class, numGuest, "numpersonas");
+        habitacionEntities = this.habitacionRepository.findAll ();
         habitacionModels = this.habitacionFactory.habitacionListEntity2Model(habitacionEntities);
-        return habitacionModels;
+        List<HabitacionModel> habitaciones = new ArrayList();
+        for (HabitacionModel habitacion : habitacionModels){
+            if(habitacion.getNumpersonas ()>=numGuest){
+                habitaciones.add (habitacion);
+            }
+        }
+        return habitaciones;
     }
 
     @Override
     public List<HabitacionModel> showHabitacionesByTipo() {
-        habitacionEntities = (List<HabitacionEntity>)(List<?>)this.masterRepository.showByType(HabitacionEntity.class, "tipo");
+        habitacionEntities = this.habitacionRepository.findAll((Sort.by(Sort.Direction.ASC, "tipo")));
         List<HabitacionModel> habitacionModels = this.habitacionFactory.habitacionListEntity2Model (habitacionEntities);
         return habitacionModels;
     }
 
     @Override
     public List<HabitacionModel> showHabitacionesByTipoID(long id) {
-        habitacionEntities = (List<HabitacionEntity>)(List<?>)this.masterRepository.showByTypeID(HabitacionEntity.class, id,"tipo");
+        habitacionEntities = this.habitacionRepository.findAll ();
         List<HabitacionModel> habitacionModels = this.habitacionFactory.habitacionListEntity2Model (habitacionEntities);
-        return habitacionModels;
+        List<HabitacionModel> habitaciones = new ArrayList();
+        for (HabitacionModel habitacion : habitacionModels){
+            if (habitacion.getTipoModel ().getId () == id){
+                habitaciones.add (habitacion);
+            }
+        }
+        return habitaciones;
     }
 
     @Override
     public HabitacionModel showHabitacionByID(long hab_id) {
-        habitacionEntity = (HabitacionEntity) this.masterRepository.listarById(hab_id, HabitacionEntity.class);
+        habitacionEntity = this.habitacionRepository.findById (hab_id).orElseThrow(RuntimeException::new);
         HabitacionModel habitacionModel = this.habitacionFactory.habitacionEntity2Model(habitacionEntity);
         return habitacionModel;
     }
-
-
 }

@@ -4,6 +4,7 @@ import com.hotel.java.application.domain.entities.TipoEntity;
 import com.hotel.java.application.domain.factories.TipoFactory;
 import com.hotel.java.application.models.TipoModel;
 import com.hotel.java.application.repositories.MasterRepository;
+import com.hotel.java.application.repositories.TipoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,19 +12,19 @@ import java.util.List;
 @Service
 public class TipoServiceImplementation implements TipoService{
 
-    private final MasterRepository masterRepository;
+    private final TipoRepository tipoRepository;
     private final TipoFactory tipoFactory;
     private List<TipoEntity> tipoEntities;
 
-    public TipoServiceImplementation(MasterRepository masterRepository, TipoFactory tipoFactory) {
-        this.masterRepository = masterRepository;
+    public TipoServiceImplementation(TipoRepository tipoRepository, TipoFactory tipoFactory) {
+        this.tipoRepository = tipoRepository;
         this.tipoFactory = tipoFactory;
     }
 
 
     @Override
     public List<TipoModel> showAllTipos() {
-        tipoEntities = (List<TipoEntity>)(List<?>)this.masterRepository.listarTodo (TipoEntity.class);
+        tipoEntities = this.tipoRepository.findAll ();
         List<TipoModel> tipoModels = this.tipoFactory.tipoListEntity2Model(tipoEntities);
         return tipoModels;
     }

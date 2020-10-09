@@ -39,10 +39,8 @@ public class LoginController {
     @PostMapping("newUser")
     public String submit(@Valid @ModelAttribute("signUP") SignupFormDtoModel signupFormDtoModel){
         ClienteModel cliente = new ClienteModel (signupFormDtoModel.getNombre (), signupFormDtoModel.getApellido (), signupFormDtoModel.getEmail ());
-        long res = clienteService.createCliente (cliente);
-        cliente.setId (res);
-        LoginModel login = new LoginModel (signupFormDtoModel.getNewUsername (), signupFormDtoModel.getNewPassword (), "ROLE_USER", true, cliente);
-        loginService.createLogin(login);
+        LoginModel login = new LoginModel (signupFormDtoModel.getNewUsername (), signupFormDtoModel.getNewPassword (), "ROLE_USER", true, null);
+        clienteService.createCliente (cliente, login);
         return "redirect:/login?q=Registrado+Correctamente!";
     }
 

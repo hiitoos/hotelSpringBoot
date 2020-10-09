@@ -1,6 +1,5 @@
 package com.hotel.java.application.repositories;
 
-import com.hotel.java.application.domain.entities.HabitacionEntity;
 
 import java.util.List;
 
