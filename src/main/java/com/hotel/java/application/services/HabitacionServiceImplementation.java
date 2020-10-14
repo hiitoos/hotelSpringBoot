@@ -3,10 +3,9 @@ package com.hotel.java.application.services;
 import com.hotel.java.application.domain.entities.HabitacionEntity;
 //import com.hotel.java.application.domain.factories.ClienteFactory;
 import com.hotel.java.application.domain.factories.HabitacionFactory;
-//import com.hotel.java.application.domain.factories.ReservaFactory;
+//import com.hotel.java.application.domain.factories.;
 import com.hotel.java.application.models.HabitacionModel;
 import com.hotel.java.application.repositories.HabitacionRepository;
-import com.hotel.java.application.repositories.MasterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -51,7 +50,7 @@ public class HabitacionServiceImplementation implements HabitacionService{
 
     @Override
     public List<HabitacionModel> showHabitacionesByTipo() {
-        habitacionEntities = this.habitacionRepository.findAll((Sort.by(Sort.Direction.ASC, "tipo")));
+        habitacionEntities = this.habitacionRepository.findAll((Sort.by("tipo")));
         List<HabitacionModel> habitacionModels = this.habitacionFactory.habitacionListEntity2Model (habitacionEntities);
         return habitacionModels;
     }

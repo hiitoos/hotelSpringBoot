@@ -1,5 +1,5 @@
 package com.hotel.java.application.repositories;
-
+/*
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -199,4 +199,4 @@ public class MasterRepositoryImplementation implements MasterRepository{
         }
         return object;
     }
-}
+}*/

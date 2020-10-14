@@ -1,6 +1,6 @@
 package com.hotel.java.application.repositories;
 
-
+/*
 import java.util.List;
 
 public interface MasterRepository {
@@ -14,4 +14,4 @@ public interface MasterRepository {
     List<Object> showByTypeID(Class classEntity, long valor, String campo);
     Object listarCampo(String campo, Class classEntity, String valor);
 
-}
+}*/

@@ -3,7 +3,6 @@ package com.hotel.java.application.services;
 import com.hotel.java.application.domain.entities.TipoEntity;
 import com.hotel.java.application.domain.factories.TipoFactory;
 import com.hotel.java.application.models.TipoModel;
-import com.hotel.java.application.repositories.MasterRepository;
 import com.hotel.java.application.repositories.TipoRepository;
 import org.springframework.stereotype.Service;
 

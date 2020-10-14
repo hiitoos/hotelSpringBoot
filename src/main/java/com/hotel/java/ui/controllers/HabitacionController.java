@@ -80,10 +80,13 @@ public class HabitacionController {
     @GetMapping("/showRoom/{id}")
     public ModelAndView showRoom(@PathVariable ("id") long hab_id) {
         HabitacionModel habitacion = habitacionService.showHabitacionByID(hab_id);
-        ModelAndView model = new ModelAndView ("hab_final");
-        model.addObject ("habitacion", habitacion);
+        if (habitacion!= null) {
+            ModelAndView model = new ModelAndView ("hab_final");
+            model.addObject ("habitacion", habitacion);
 
-        return model;
+            return model;
+        }
+        return new ModelAndView ("404");
     }
 
 }

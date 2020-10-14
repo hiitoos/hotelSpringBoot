@@ -1,14 +1,19 @@
 package com.hotel.java.ui.controllers;
 
 import com.fasterxml.jackson.databind.util.JSONWrappedObject;
-import com.hotel.java.application.models.ReservaModel;
+import com.hotel.java.application.dto.ReservaDtoModel;
+import com.hotel.java.application.dto.SignupFormDtoModel;
+import com.hotel.java.application.models.*;
 import com.hotel.java.application.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -20,20 +25,108 @@ public class ControllerJson {
     private final LoginService loginService;
     private final HabitacionService habitacionService;
     private final ClienteService clienteService;
+    private final TipoService tipoService;
 
     @Autowired
-    public ControllerJson(ReservaService reservaService, DateDiffService dateDiffService, LoginService loginService, HabitacionService habitacionService, ClienteService clienteService) {
+    public ControllerJson(ReservaService reservaService, TipoService tipoService, DateDiffService dateDiffService, LoginService loginService, HabitacionService habitacionService, ClienteService clienteService) {
         this.reservaService = reservaService;
+        this.tipoService = tipoService;
         this.dateDiffService = dateDiffService;
         this.loginService = loginService;
         this.habitacionService = habitacionService;
         this.clienteService = clienteService;
     }
 
+    /***************************-------- HABITACIONES --------***************************/
 
-    @GetMapping("/showReservas")
-    public List<?> showAllReservas (){
-        List<ReservaModel> reservas = reservaService.listReservas ();
-        return reservas;
+    @GetMapping("/showAllRooms")
+    public List<HabitacionModel> showAllRooms (){
+        List<HabitacionModel> habitaciones = habitacionService.showAllHabitaciones();
+        if (habitaciones.size ()>0)
+            return habitaciones;
+        return null; /**Pending show error from null rooms*/
     }
+
+    @GetMapping("/showRoomsByGuest")
+    public List<HabitacionModel> showroomsByGuest(
+        @RequestParam(value="checkIn")String checkIn,
+        @RequestParam(value="checkOut")String checkOut,
+        @RequestParam(value="numguest") int numguest) {
+        SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd");
+        Date check_In = null;
+        Date check_Out = null;
+        try {
+            check_In = formatter.parse (checkIn);
+            check_Out = formatter.parse (checkOut);
+        } catch (ParseException e) {
+            e.printStackTrace ();
+        }
+        List<HabitacionModel> habitaciones = habitacionService.showHabitacionesByGuest (numguest);
+        long diffInMillis = check_Out.getTime () - check_In.getTime ();
+        if (diffInMillis < 0) {
+            return null; /** Pending show date errors*/
+        }
+        return habitaciones;
+    }
+
+    @GetMapping("/showRoomByType/{id}")
+    public List<HabitacionModel> showRoomByType(@PathVariable("id") long tipo_id) {
+        List<HabitacionModel> habitaciones = habitacionService.showHabitacionesByTipoID(tipo_id);
+        if (habitaciones.size ()>0)
+            return habitaciones;
+        return null; /**Pending show error from null room*/
+    }
+
+    @GetMapping("/showRoomById/{id}")
+    public HabitacionModel showRoomById(@PathVariable ("id") long hab_id) {
+        HabitacionModel habitacion = habitacionService.showHabitacionByID(hab_id);
+        if (habitacion!= null) {
+            ModelAndView model = new ModelAndView ("hab_final");
+            model.addObject ("habitacion", habitacion);
+
+            return habitacion;
+        }
+        return null; /**Pending show error from null room*/
+    }
+
+    /***************************-------- RESERVAS --------***************************/
+
+    @GetMapping("showAllBookings")
+    public List<ReservaModel> viewList(){
+        List<ReservaModel> reservas = reservaService.listReservas ();
+        if(reservas.size ()>0)
+            return reservas;
+        return null; /**Pending show erro from null room*/
+    }
+
+    @GetMapping("newReserva")
+    public String newReserva(@Valid @ModelAttribute("reserva") ReservaDtoModel reservaDtoModel) {
+        float precioTotal = (float) dateDiffService.calculateTotalPrice (reservaDtoModel.getCheckIn (), reservaDtoModel.getCheckOut (), reservaDtoModel.getPrecioHab ());
+        ClienteModel clienteReserva = clienteService.buscaId (loginService.buscaClientIdFromUsername (reservaDtoModel.getUsername ()).getId ());
+        HabitacionModel habitacionModel = habitacionService.showHabitacionByID (reservaDtoModel.getHabId ());
+        ReservaModel reservaModel = new ReservaModel (reservaDtoModel.getCheckIn (), reservaDtoModel.getCheckOut (), precioTotal, clienteReserva, habitacionModel);
+        boolean result = this.reservaService.operateReserva (reservaModel, "new");
+        if (result)
+            return "Insercion correcta";
+        return "Error en la insercion de la nueva reserva, contacte con el administrador";
+    }
+
+    /***************************-------- Login --------***************************/
+
+    @PostMapping("newUser")
+    public String submit(@Valid @ModelAttribute("signUP") SignupFormDtoModel signupFormDtoModel){
+        ClienteModel cliente = new ClienteModel (signupFormDtoModel.getNombre (), signupFormDtoModel.getApellido (), signupFormDtoModel.getEmail ());
+        LoginModel login = new LoginModel (signupFormDtoModel.getNewUsername (), signupFormDtoModel.getNewPassword (), "ROLE_USER", true, null);
+        clienteService.createCliente (cliente, login);
+        return "redirect:/login?q=Registrado+Correctamente!";
+    }
+
+    /***************************-------- Index --------***************************/
+
+    @GetMapping
+    public List<TipoModel> index() {
+        List<TipoModel> tipos = this.tipoService.showAllTipos ();
+        return tipos;
+    }
+
 }

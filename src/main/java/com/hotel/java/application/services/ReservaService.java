@@ -10,5 +10,5 @@ public interface ReservaService {
     /*void newReserva(ReservaModel reservaModel);
     void deleteReserva(ReservaModel reservaModel);
     void updateReserva(ReservaModel reservaModel);*/
-    void operateReserva(ReservaModel reservaModel, String modo);
+    boolean operateReserva(ReservaModel reservaModel, String modo);
 }

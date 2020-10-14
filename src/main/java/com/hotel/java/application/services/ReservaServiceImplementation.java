@@ -5,7 +5,6 @@ import com.hotel.java.application.domain.factories.ClienteFactory;
 import com.hotel.java.application.domain.factories.HabitacionFactory;
 import com.hotel.java.application.domain.factories.ReservaFactory;
 import com.hotel.java.application.models.ReservaModel;
-import com.hotel.java.application.repositories.MasterRepository;
 import com.hotel.java.application.repositories.ReservaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,7 +42,8 @@ public class ReservaServiceImplementation implements ReservaService {
     }
 
     @Override
-    public void operateReserva(ReservaModel reservaModel, String modo) {
+    public boolean operateReserva(ReservaModel reservaModel, String modo) {
+        long a=0;
         ReservaEntity reservaEntity = new ReservaEntity (
             reservaModel.getId (),
                 reservaModel.getFechaIn (),
@@ -55,17 +55,23 @@ public class ReservaServiceImplementation implements ReservaService {
         switch (modo){
             case "new":
             case "update": {
-                this.reservaRepository.save (reservaEntity);
+                a = this.reservaRepository.save (reservaEntity).getClienteEntity_id ().getId ();
                 this.reservaRepository.flush ();
-                break;
+                if(a>0){
+                    return true;
+                }
+                return false;
             }
             case "delete": {
-                this.reservaRepository.delete (reservaEntity);
-                break;
+                try {
+                    this.reservaRepository.delete (reservaEntity);
+                    return true;
+                }
+                catch (Exception e){
+                    return false;
+                }
             }
-            default: System.out.println (
-                    "Error de modo: ReservaImplementation -> operateReserva -> variable \"modo\" mal pasada"
-                    );
+            default: return false;
         }
     }
 }
