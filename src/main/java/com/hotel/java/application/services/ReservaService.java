@@ -2,6 +2,7 @@ package com.hotel.java.application.services;
 
 import com.hotel.java.application.models.ReservaModel;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface ReservaService {
@@ -11,4 +12,5 @@ public interface ReservaService {
     void deleteReserva(ReservaModel reservaModel);
     void updateReserva(ReservaModel reservaModel);*/
     boolean operateReserva(ReservaModel reservaModel, String modo);
+    List<Date> listaDate (long id);
 }

@@ -42,6 +42,8 @@ public class HabitacionController {
             @RequestParam(value="checkIn")String checkIn,
             @RequestParam(value="checkOut")String checkOut,
             @RequestParam(value="numguest") int numguest) {
+
+        //Controlar datos que no sean vacios y en ese caso mostrar error no fechas
         SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd");
         Date check_In = null;
         Date check_Out = null;
@@ -58,6 +60,7 @@ public class HabitacionController {
         if (diffInMillis<0) {
             model2.addAttribute ("fechaErronea", "Fechas erroneas");
             return new ModelAndView ("redirect:/", model2);
+            //habitaciones/showByGuest/?checkIn=0000-00-00&checkOut=0000-00-00&kids=0&numguest=1
         }
         model.addObject ("habitacion", habitaciones);
 

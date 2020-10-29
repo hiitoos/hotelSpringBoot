@@ -9,7 +9,10 @@ import com.hotel.java.application.repositories.ReservaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class ReservaServiceImplementation implements ReservaService {
@@ -73,5 +76,21 @@ public class ReservaServiceImplementation implements ReservaService {
             }
             default: return false;
         }
+    }
+
+    @Override
+    public List<Date> listaDate(long id) {
+        List<Date[]> datesGet = this.reservaRepository.dateBookingsByRoom (id);
+        List<Date> dates = new ArrayList<> ();
+
+        for (int i=0; i<datesGet.size (); i++){
+            Date start = datesGet.get(i)[0];
+            Date end = datesGet.get(i)[1];
+            while(!start.equals (end)){
+                dates.add (start);
+                start = new Date(start.getTime () + TimeUnit.DAYS.toMillis (1));
+            }
+        }
+        return dates;
     }
 }
