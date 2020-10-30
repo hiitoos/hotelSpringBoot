@@ -16,23 +16,22 @@ public class ReservaDtoModel {
 
     @NotNull
     @NotEmpty
-    String precioHab;
+    double precioHab;
 
     @NotNull
     @NotEmpty
-    String habId;
+    long habId;
 
     @NotNull
     @NotEmpty
-    String username;
+    long id_cliente;
 
-
-    public String getUsername() {
-        return username;
+    public long getId_cliente() {
+        return 1;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setId_cliente(long id_cliente) {
+        this.id_cliente = id_cliente;
     }
 
     public Date getCheckIn() {
@@ -51,19 +50,19 @@ public class ReservaDtoModel {
         this.checkOut = checkOut;
     }
 
-    public Float getPrecioHab() {
-        return Float.parseFloat (precioHab);
+    public double getPrecioHab() {
+        return precioHab;
     }
 
-    public void setPrecioHab(Float precioHab) {
-        this.precioHab = String.valueOf (precioHab);
+    public void setPrecioHab(double precioHab) {
+        this.precioHab=precioHab;
     }
 
     public Long getHabId() {
-        return Long.parseLong (habId);
+        return habId;
     }
 
     public void setHabId(Long habId) {
-        this.habId = String.valueOf (habId);
+        this.habId = habId;
     }
 }

@@ -53,10 +53,10 @@ public class ReservaController {
     @GetMapping("newReserva")
     public ModelAndView newReserva(@Valid @ModelAttribute("reserva")ReservaDtoModel reservaDtoModel) {
         float precioTotal = (float) dateDiffService.calculateTotalPrice (reservaDtoModel.getCheckIn (), reservaDtoModel.getCheckOut (), reservaDtoModel.getPrecioHab ());
-        ClienteModel clienteReserva = clienteService.buscaId (loginService.buscaClientIdFromUsername (reservaDtoModel.getUsername ()).getId ());
+        //ClienteModel clienteReserva = clienteService.buscaId (loginService.buscaClientIdFromUsername (reservaDtoModel.getUsername ()).getId ());
         HabitacionModel habitacionModel = habitacionService.showHabitacionByID (reservaDtoModel.getHabId ());
-        ReservaModel reservaModel = new ReservaModel (reservaDtoModel.getCheckIn (), reservaDtoModel.getCheckOut (), precioTotal, clienteReserva, habitacionModel);
-        this.reservaService.operateReserva (reservaModel, "new");
+        //ReservaModel reservaModel = new ReservaModel (reservaDtoModel.getCheckIn (), reservaDtoModel.getCheckOut (), precioTotal, clienteReserva, habitacionModel);
+        //this.reservaService.operateReserva (reservaModel, "new");
         return new ModelAndView ("index");
     }
 

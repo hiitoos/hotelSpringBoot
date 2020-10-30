@@ -11,6 +11,6 @@ public interface ReservaService {
     /*void newReserva(ReservaModel reservaModel);
     void deleteReserva(ReservaModel reservaModel);
     void updateReserva(ReservaModel reservaModel);*/
-    boolean operateReserva(ReservaModel reservaModel, String modo);
+    long operateReserva(ReservaModel reservaModel, String modo);
     List<Date> listaDate (long id);
 }

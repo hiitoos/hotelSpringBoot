@@ -45,8 +45,8 @@ public class ReservaServiceImplementation implements ReservaService {
     }
 
     @Override
-    public boolean operateReserva(ReservaModel reservaModel, String modo) {
-        long a=0;
+    public long operateReserva(ReservaModel reservaModel, String modo) {
+        long id=0;
         ReservaEntity reservaEntity = new ReservaEntity (
             reservaModel.getId (),
                 reservaModel.getFechaIn (),
@@ -58,23 +58,24 @@ public class ReservaServiceImplementation implements ReservaService {
         switch (modo){
             case "new":
             case "update": {
-                a = this.reservaRepository.save (reservaEntity).getClienteEntity_id ().getId ();
+//                id = this.reservaRepository.save (reservaEntity).getClienteEntity_id ().getId ();
+                id = this.reservaRepository.save (reservaEntity).getId ();
                 this.reservaRepository.flush ();
-                if(a>0){
-                    return true;
+                if(id>0){
+                    return id;
                 }
-                return false;
+                return 0;
             }
             case "delete": {
                 try {
                     this.reservaRepository.delete (reservaEntity);
-                    return true;
+                    return reservaEntity.getId ();
                 }
                 catch (Exception e){
-                    return false;
+                    return 0;
                 }
             }
-            default: return false;
+            default: return 0;
         }
     }
 

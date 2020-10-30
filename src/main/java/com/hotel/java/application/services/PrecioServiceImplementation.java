@@ -10,7 +10,7 @@ import java.util.Calendar;
 public class PrecioServiceImplementation implements PrecioService{
 
     @Override
-    public int calculaDescuento(long dias) {
+    public double calculaDescuento(long dias) {
 //        Calendar c = Calendar.getInstance();
 //       // Set the calendar to monday of the current week
 //       c.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
@@ -31,9 +31,9 @@ public class PrecioServiceImplementation implements PrecioService{
 //           // As Cute as a ZuZu pet.
 //           //c.add(Calendar.DATE, dayOfWeek > Calendar.THURSDAY ? (9 - dayOfWeek) : 1);
 //       }
-        if (dias>=10 && dias <15) return 5;
-        if (dias>=15 && dias <20) return 10;
-        if (dias>=20) return 20;
-        return 0;
+        if (dias>=10 && dias <15) return 0.05; //5% discount
+        if (dias>=15 && dias <20) return 0.10; //10% discount
+        if (dias>=20) return 0.2; //20% discount
+        return 0; //0% discount
     }
 }

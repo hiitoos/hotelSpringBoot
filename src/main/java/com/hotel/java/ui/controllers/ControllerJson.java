@@ -103,16 +103,21 @@ public class ControllerJson {
         return null; /**Pending show erro from null room*/
     }
 
-    @GetMapping("newReserva")
-    public String newReserva(@Valid @ModelAttribute("reserva") ReservaDtoModel reservaDtoModel) {
-        float precioTotal = (float) dateDiffService.calculateTotalPrice (reservaDtoModel.getCheckIn (), reservaDtoModel.getCheckOut (), reservaDtoModel.getPrecioHab ());
-        ClienteModel clienteReserva = clienteService.buscaId (loginService.buscaClientIdFromUsername (reservaDtoModel.getUsername ()).getId ());
+    @GetMapping("showBookingById/{id}")
+    public ReservaModel showBooking(@PathVariable ("id") long id){
+        ReservaModel reservaModel = this.reservaService.listReservaById (id);
+        return reservaModel;
+    }
+
+    @PostMapping("newBooking")
+    public long newBooking (@RequestBody ReservaDtoModel reservaDtoModel){
         HabitacionModel habitacionModel = habitacionService.showHabitacionByID (reservaDtoModel.getHabId ());
-        ReservaModel reservaModel = new ReservaModel (reservaDtoModel.getCheckIn (), reservaDtoModel.getCheckOut (), precioTotal, clienteReserva, habitacionModel);
-        boolean result = this.reservaService.operateReserva (reservaModel, "new");
-        if (result)
-            return "Insercion correcta";
-        return "Error en la insercion de la nueva reserva, contacte con el administrador";
+        ClienteModel clienteReserva = clienteService.buscaId (reservaDtoModel.getId_cliente ());
+        ReservaModel reservaModel = new ReservaModel (reservaDtoModel.getCheckIn (), reservaDtoModel.getCheckOut (), (float) reservaDtoModel.getPrecioHab (), clienteReserva, habitacionModel);
+        long result = this.reservaService.operateReserva (reservaModel, "new");
+        if(result>0)
+            return result;
+        return 0;
     }
 
     /***************************-------- Login --------***************************/
@@ -142,12 +147,11 @@ public class ControllerJson {
     /***************************-------- Precio --------***************************/
     @PostMapping("calculaPrecio")
     public double calculaPrecio (@RequestBody PrecioDtoModel datosPrecio){
-//recoge precioHab, multiplica por dif entre dias
         double precioHab = this.habitacionService.showHabitacionByID (datosPrecio.getId ()).getPrecio ();
         long dias = this.dateDiffService.getDaysBetweenTwoDates (datosPrecio.checkIn, datosPrecio.checkOut);
         double subTotal = this.dateDiffService.calculateTotalPrice (datosPrecio.checkIn, datosPrecio.checkOut, precioHab);
-        int descuento = this.precioService.calculaDescuento (dias);
-        double total = subTotal + (subTotal*(descuento/100));
+        double descuento = this.precioService.calculaDescuento (dias);
+        double total = subTotal - (subTotal*descuento);
         return total;
     }
 
