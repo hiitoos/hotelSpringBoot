@@ -1,18 +1,15 @@
 package com.hotel.java.ui.controllers;
 
-import com.hotel.java.application.dto.FinalRoomDtoModel;
-import com.hotel.java.application.dto.PrecioDtoModel;
-import com.hotel.java.application.dto.ReservaDtoModel;
-import com.hotel.java.application.dto.SignupFormDtoModel;
+import com.hotel.java.application.dto.*;
 import com.hotel.java.application.models.*;
 import com.hotel.java.application.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,7 +28,13 @@ public class ControllerJson {
     private final PrecioService precioService;
 
     @Autowired
-    public ControllerJson(ReservaService reservaService, TipoService tipoService, DateDiffService dateDiffService, LoginService loginService, HabitacionService habitacionService, ClienteService clienteService, PrecioService precioService) {
+    public ControllerJson(ReservaService reservaService,
+                          TipoService tipoService,
+                          DateDiffService dateDiffService,
+                          LoginService loginService,
+                          HabitacionService habitacionService,
+                          ClienteService clienteService,
+                          PrecioService precioService) {
         this.reservaService = reservaService;
         this.tipoService = tipoService;
         this.dateDiffService = dateDiffService;
@@ -44,33 +47,24 @@ public class ControllerJson {
     /***************************-------- HABITACIONES --------***************************/
 
     @GetMapping("showAllRooms")
-    public List<HabitacionModel> showAllRooms (){
+    public List<AllRoomsAndDatesDtoModel> showAllRooms (){
         List<HabitacionModel> habitaciones = habitacionService.showAllHabitaciones();
+        List<AllRoomsAndDatesDtoModel> roomsDates = new ArrayList<> ();
+        for (HabitacionModel hab : habitaciones){
+            AllRoomsAndDatesDtoModel roomsDate = new AllRoomsAndDatesDtoModel (
+                    hab.getId (),
+                    hab.getCodigo (),
+                    hab.getDescripcion (),
+                    hab.getPrecio (),
+                    hab.getTipoModel (),
+                    hab.getNumpersonas (),
+                    this.reservaService.listaDate (hab.getId ())
+            );
+            roomsDates.add(roomsDate);
+        }
         if (habitaciones.size ()>0)
-            return habitaciones;
+            return roomsDates;
         return null; /**Pending show error from null rooms*/
-    }
-
-    @GetMapping("showRoomsByGuest")
-    public List<HabitacionModel> showroomsByGuest(
-        @RequestParam(value="checkIn")String checkIn,
-        @RequestParam(value="checkOut")String checkOut,
-        @RequestParam(value="numguest") int numguest) {
-        SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd");
-        Date check_In = null;
-        Date check_Out = null;
-        try {
-            check_In = formatter.parse (checkIn);
-            check_Out = formatter.parse (checkOut);
-        } catch (ParseException e) {
-            e.printStackTrace ();
-        }
-        List<HabitacionModel> habitaciones = habitacionService.showHabitacionesByGuest (numguest);
-        long diffInMillis = check_Out.getTime () - check_In.getTime ();
-        if (diffInMillis < 0) {
-            return null; /** Pending show date errors*/
-        }
-        return habitaciones;
     }
 
     @GetMapping("showRoomByType/{id}")
@@ -85,8 +79,6 @@ public class ControllerJson {
     public FinalRoomDtoModel showRoomById(@PathVariable ("id") long hab_id) {
         HabitacionModel habitacion = habitacionService.showHabitacionByID(hab_id);
         if (habitacion!= null) {
-//            ModelAndView model = new ModelAndView ("hab_final");
-//            model.addObject ("habitacion", habitacion);
             List<java.sql.Date> fechas = this.reservaService.listaDate (hab_id);
             return new FinalRoomDtoModel (habitacion, fechas);
         }
@@ -149,8 +141,10 @@ public class ControllerJson {
     public double calculaPrecio (@RequestBody PrecioDtoModel datosPrecio){
         double precioHab = this.habitacionService.showHabitacionByID (datosPrecio.getId ()).getPrecio ();
         long dias = this.dateDiffService.getDaysBetweenTwoDates (datosPrecio.checkIn, datosPrecio.checkOut);
+        double descTemporada = this.precioService.calculaTemporada (datosPrecio.checkIn, datosPrecio.checkOut);
         double subTotal = this.dateDiffService.calculateTotalPrice (datosPrecio.checkIn, datosPrecio.checkOut, precioHab);
         double descuento = this.precioService.calculaDescuento (dias);
+        descuento += descTemporada;
         double total = subTotal - (subTotal*descuento);
         return total;
     }

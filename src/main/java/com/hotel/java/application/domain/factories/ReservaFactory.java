@@ -40,19 +40,6 @@ public class ReservaFactory {
         return reservaModel;
     }
 
-    /*public List<ReservaEntity> reservaListModel2Entity  (List<ReservaModel> reservaModels){
-        List<ReservaEntity> reservaEntities = new ArrayList<> ();
-        for (ReservaModel reserva : reservaModels){
-            ReservaEntity reservaEntity =
-                    new ReservaEntity (
-                            reserva.getNombre (),
-                            reserva.getApellido (),
-                            reserva.getEmail ()
-                    );
-        }
-        return reservaEntities;
-    }*/
-
     public List<ReservaModel> reservaListEntity2Model(List<ReservaEntity> reservaEntities){
         List<ReservaModel> reservaModels = new ArrayList<> ();
         for (ReservaEntity reserva : reservaEntities){

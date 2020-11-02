@@ -1,13 +1,21 @@
 package com.hotel.java.application.services;
 
+import com.hotel.java.application.repositories.TemporadaRepository;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 @Service
 public class PrecioServiceImplementation implements PrecioService{
+    private TemporadaRepository temporadaRepository;
+
+    public PrecioServiceImplementation(TemporadaRepository temporadaRepository) {
+        this.temporadaRepository = temporadaRepository;
+    }
 
     @Override
     public double calculaDescuento(long dias) {
@@ -36,4 +44,17 @@ public class PrecioServiceImplementation implements PrecioService{
         if (dias>=20) return 0.2; //20% discount
         return 0; //0% discount
     }
+
+    @Override
+    public float calculaTemporada(Date in, Date out) {
+        float descuentoFi = this.temporadaRepository.descuento (in);
+//        float descuentoFo = this.temporadaRepository.descuento (out);
+//
+//        if (descuentoFi == descuentoFo)
+            return descuentoFi;
+//        if (descuentoFi < descuentoFo)
+//            return (descuentoFo/2);
+//        return (descuentoFo/2);
+    }
+
 }
