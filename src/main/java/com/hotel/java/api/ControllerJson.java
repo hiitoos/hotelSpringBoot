@@ -1,4 +1,4 @@
-package com.hotel.java.ui.controllers;
+package com.hotel.java.api;
 
 import com.hotel.java.application.dto.*;
 import com.hotel.java.application.models.*;
@@ -146,7 +146,7 @@ public class ControllerJson {
         double descuento = this.precioService.calculaDescuento (dias);
         descuento += descTemporada;
         double total = subTotal - (subTotal*descuento);
-        return total;
+        return total!=0?total:precioHab;
     }
 
 }

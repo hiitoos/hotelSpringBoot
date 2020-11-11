@@ -1,6 +1,5 @@
 package com.hotel.java.application.dto;
 
-import com.hotel.java.application.models.HabitacionModel;
 import com.hotel.java.application.models.TipoModel;
 
 import java.sql.Date;
