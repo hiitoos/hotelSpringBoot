@@ -65,4 +65,12 @@ public class ReservaDtoModel {
     public void setHabId(Long habId) {
         this.habId = habId;
     }
+
+    public ReservaDtoModel(@NotNull @NotEmpty Date checkIn, @NotNull @NotEmpty Date checkOut, @NotNull @NotEmpty double precioHab, @NotNull @NotEmpty long habId, @NotNull @NotEmpty long id_cliente) {
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.precioHab = precioHab;
+        this.habId = habId;
+        this.id_cliente = id_cliente;
+    }
 }
