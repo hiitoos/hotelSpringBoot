@@ -24,8 +24,14 @@ public class PrecioServiceImplementation implements PrecioService{
 
     @Override
     public float calculaTemporada(Date in, Date out) {
-        float descuentoFi = this.temporadaRepository.descuento (in);
-        float descuentoFo = this.temporadaRepository.descuento (out);
+        float descuentoFi = 0;
+        float descuentoFo = 0;
+        try {
+            descuentoFi = this.temporadaRepository.descuento (in);
+            descuentoFo = this.temporadaRepository.descuento (out);
+        } catch(Exception e){
+            return 0;
+        }
 
         if (descuentoFi == descuentoFo)
             return descuentoFi;
