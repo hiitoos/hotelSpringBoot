@@ -34,7 +34,7 @@ public class ReservaServiceImplementation implements ReservaService {
 
     @Override
     public List<ReservaModel> listReservas() {
-        List<ReservaEntity> reservaEntities = this.reservaRepository.findAll();
+        List<ReservaEntity> reservaEntities = (List<ReservaEntity>) this.reservaRepository.findAll();
         return this.reservaFactory.reservaListEntity2Model(reservaEntities);
     }
 
@@ -59,7 +59,7 @@ public class ReservaServiceImplementation implements ReservaService {
             case "new":
             case "update": {
                 id = this.reservaRepository.save (reservaEntity).getId ();
-                this.reservaRepository.flush ();
+                //this.reservaRepository.flush ();
                 if(id>0){
                     return id;
                 }

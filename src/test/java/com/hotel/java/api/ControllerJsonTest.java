@@ -42,7 +42,6 @@ public class ControllerJsonTest {
                 .build();
     }
 
-
     @Test
     public void ShouldReturnBookingIdWhenNewBooking() throws Exception{
         ReservaDtoModel reserva = new ReservaDtoModel (
@@ -53,12 +52,13 @@ public class ControllerJsonTest {
             1
         );
 
-        mvc.perform (post("/api/newBooking")
+        mvc.perform (post("/newBooking")
                 .contentType (MediaType.APPLICATION_JSON)
                 .content (this.toJson(reserva)))
             .andDo(print())
             .andExpect (status().isOk())
-            .andExpect (jsonPath ("$").isNumber ()) //h2 and expect id = 1
+            .andExpect (jsonPath ("$").isNumber ())
+            .andExpect (jsonPath ("$").value (1))
         ;
     }
 
