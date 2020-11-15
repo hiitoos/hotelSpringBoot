@@ -22,7 +22,7 @@ public class ClienteServiceTest {
     private ClienteService clienteService;
 
     @Test
-    @DisplayName ("Se comprueba que devuelve el id del cliente")
+    @DisplayName ("Se comprueba que devuelve el id del cliente al crear cliente")
     public void ShouldReturnClientId() {
         ClienteModel mockCliente = new ClienteModel ("Cliente", "SuApellido", "suCorreo@correo.com");
         LoginModel login = new LoginModel ("usu", "pass", "ROLE_USER", true, mockCliente);
