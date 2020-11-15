@@ -16,9 +16,6 @@ public class HabitacionEntity{
     private TipoEntity tipo;
     private int numpersonas;
 
-    /*@OneToOne (mappedBy = "habitacion", fetch = FetchType.LAZY)
-    private ReservaEntity reserva;*/
-
     public HabitacionEntity(long id, String codigo, String descripcion, float precio, TipoEntity tipo, int numpersonas) {
         setId (id);
         setCodigo (codigo);
@@ -27,14 +24,6 @@ public class HabitacionEntity{
         setTipo(tipo);
         setNumpersonas(numpersonas);
     }
-
-    /*public HabitacionEntity(String codigo, String descripcion, float precio, TipoEntity tipo, int numpersonas) {
-        setCodigo (codigo);
-        setDescripcion (descripcion);
-        setPrecio (precio);
-        setTipo (tipo);
-        setNumpersonas(numpersonas);
-    }*/
 
     public HabitacionEntity() {
     }
@@ -78,15 +67,6 @@ public class HabitacionEntity{
     public void setTipo(TipoEntity tipo) {
         this.tipo = tipo;
     }
-
-   /* public ReservaEntity getReservaEntity() {
-        return reserva;
-    }
-
-    public void setReserva(ReservaEntity reserva) {
-        this.reserva = reserva;
-    }
-*/
 
     public int getNumpersonas() {
         return numpersonas;

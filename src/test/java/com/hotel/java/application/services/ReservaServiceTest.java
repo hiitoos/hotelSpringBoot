@@ -7,6 +7,7 @@ import com.hotel.java.application.models.ReservaModel;
 import com.hotel.java.application.models.TipoModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -28,7 +29,6 @@ public class ReservaServiceTest {
     @Test
     @DisplayName ("Devuelve la lista de reservas cuando llama al metodo")
     public void ShouldReturnBookingListWhenCallTheMethod(){
-        List<ReservaModel> reservas = new ArrayList ();
         ReservaModel reserva1 = new ReservaModel (
                 1,
                 Date.valueOf ("2020-11-19"),
@@ -43,15 +43,18 @@ public class ReservaServiceTest {
                 2,
                 Date.valueOf ("2020-11-22"),
                 Date.valueOf ("2020-11-23"),
-                100,
+                300,
                 new ClienteModel (1, "nombre", "apellido", "correo@correo.com"),
                 new HabitacionModel ("HabCod", "DescHab", 100, new TipoModel (1, "tipo", "tipo"), 3)
 
         );
-        reservas.add(reserva1);
-        reservas.add(reserva2);
-        when(reservaService.listReservas ()).thenReturn (reservas);
-        assertThat(reservaService.listReservas ()).isEqualTo (reservas);
+
+        List<ReservaModel> reservas = new ArrayList ();
+        reservas.add (reserva1);
+        reservas.add (reserva2);
+        when (reservaService.listReservas()).thenReturn (reservas);
+
+        assertThat(reservaService.listReservas ()).hasSizeGreaterThan (1);
     }
 
     @Test
@@ -68,6 +71,7 @@ public class ReservaServiceTest {
         );
         when (reservaService.listReservaById (1)).thenReturn (reserva1);
         assertThat (reservaService.listReservaById (1)).isEqualTo (reserva1);
+
     }
 
     @Test
@@ -101,8 +105,6 @@ public class ReservaServiceTest {
         dates.add(Date.valueOf ("2020-11-20"));
         dates.add(Date.valueOf ("2020-11-21"));
         dates.add(Date.valueOf ("2020-11-22"));
-
-
 
         when(reservaService.listaDate (reserva1.getId ())).thenReturn (dates);
         assertThat (reservaService.listaDate (1).equals (dates));

@@ -17,9 +17,6 @@ public class ClienteEntity implements Serializable {
     @OneToMany(mappedBy="cliente", fetch=FetchType.EAGER)
     private Set<ReservaEntity> reservas;
 
-    /*@OneToOne(mappedBy="cliente", fetch=FetchType.EAGER)
-    private LoginEntity login;*/
-
     public ClienteEntity(long id, String nombre, String apellido, String email) {
         setId (id);
         setNombre (nombre);
