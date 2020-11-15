@@ -1,5 +1,7 @@
 package com.hotel.java.application.models;
 
+import com.hotel.java.application.services.HabitacionService;
+
 import java.util.List;
 
 public class HabitacionModel {
@@ -9,6 +11,8 @@ public class HabitacionModel {
     private float precio;
     TipoModel tipoModel;
     private int numpersonas;
+
+    public HabitacionModel(){}
 
     public HabitacionModel(String codigo, String descripcion, float precio, TipoModel tipoModel, int numpersonas) {
         setCodigo (codigo);

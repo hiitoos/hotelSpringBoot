@@ -41,22 +41,23 @@ public class RoomController {
         return null; /**Pending show error from null rooms*/
     }
 
-    @GetMapping("showRoomByType/{id}")
-    public List<HabitacionModel> showRoomByType(@PathVariable("id") long tipo_id) {
-        List<HabitacionModel> habitaciones = habitacionService.showHabitacionesByTipoID(tipo_id);
-        if (habitaciones.size ()>0)
-            return habitaciones;
-        return null; /**Pending show error from null room*/
-    }
-
     @GetMapping("showRoomById/{id}")
-    public FinalRoomDtoModel showRoomById(@PathVariable ("id") long hab_id) {
-        HabitacionModel habitacion = habitacionService.showHabitacionByID(hab_id);
-        if (habitacion!= null) {
-            List<java.sql.Date> fechas = this.reservaService.listaDate (hab_id);
-            return new FinalRoomDtoModel (habitacion, fechas);
+    public FinalRoomDtoModel showRoomById(@PathVariable ("id") Object hab_id)  {
+        long hab = 0;
+        try{
+            hab = Long.parseLong (String.valueOf (hab_id));
+        }catch (Exception ex){
+            return new FinalRoomDtoModel (new HabitacionModel (), new ArrayList());
         }
-        return null; /**Pending show error from null room*/
+        try {
+            HabitacionModel habitacion = habitacionService.showHabitacionByID (hab);
+            if (habitacion != null) {
+                List<java.sql.Date> fechas = this.reservaService.listaDate (hab);
+                return new FinalRoomDtoModel (habitacion, fechas);
+            }
+        }catch (Exception e){}
+
+        return new FinalRoomDtoModel (new HabitacionModel (), new ArrayList());
     }
 
 }

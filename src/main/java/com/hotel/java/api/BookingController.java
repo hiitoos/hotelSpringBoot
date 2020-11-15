@@ -27,7 +27,7 @@ public class BookingController {
         List<ReservaModel> reservas = reservaService.listReservas ();
         if(reservas.size ()>0)
             return reservas;
-        return null; /**Pending show erro from null room*/
+        return null;
     }
 
     @GetMapping("showBookingById/{id}")

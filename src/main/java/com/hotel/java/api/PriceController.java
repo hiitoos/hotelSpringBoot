@@ -16,7 +16,7 @@ public class PriceController {
     private HabitacionService habitacionService;
 
     @Autowired
-    private DateDiffService dateDiffService;
+    private DateService dateService;
 
     @Autowired
     private PrecioService precioService;
@@ -24,9 +24,9 @@ public class PriceController {
     @PostMapping("calculaPrecio")
     public double calculaPrecio (@RequestBody PrecioDtoModel datosPrecio){
         double precioHab = this.habitacionService.showHabitacionByID (datosPrecio.getId ()).getPrecio ();
-        long dias = this.dateDiffService.getDaysBetweenTwoDates (datosPrecio.checkIn, datosPrecio.checkOut);
+        long dias = this.dateService.getDaysBetweenTwoDates (datosPrecio.checkIn, datosPrecio.checkOut);
         double descTemporada = this.precioService.calculaTemporada (datosPrecio.checkIn, datosPrecio.checkOut);
-        double subTotal = this.dateDiffService.calculateTotalPrice (datosPrecio.checkIn, datosPrecio.checkOut, precioHab);
+        double subTotal = this.dateService.calculateTotalPrice (datosPrecio.checkIn, datosPrecio.checkOut, precioHab);
         double descuento = this.precioService.calculaDescuento (dias);
         descuento += descTemporada;
         double total = subTotal - (subTotal*descuento);

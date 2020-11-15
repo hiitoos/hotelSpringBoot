@@ -5,7 +5,7 @@
 |  |____ |  `----.  |  |  .----)   |   |  | |  `--'  | |  |  |  |
 |_______||_______|  |__|  |_______/    |__|  \______/  |__|  |__|
 
-@Copyright 2020 - Driien & Taribo
+@Copyleft 2020 - Driien
 
 </> ZDevs Company - Recoding Emotions
 
