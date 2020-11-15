@@ -59,7 +59,6 @@ public class ReservaServiceImplementation implements ReservaService {
             case "new":
             case "update": {
                 id = this.reservaRepository.save (reservaEntity).getId ();
-                //this.reservaRepository.flush ();
                 if(id>0){
                     return id;
                 }
