@@ -24,10 +24,11 @@ public class LoginServiceImplementation implements LoginService{
     }
 
     @Override
-    public void createLogin(LoginModel loginmodel) {
+    public long createLogin(LoginModel loginmodel) {
         loginEntity = this.loginFactory.loginModel2Entity(loginmodel);
-        this.loginRepository.save (loginEntity);
+        long id = this.loginRepository.save (loginEntity).getId ();
         this.loginRepository.flush ();
+        return id;
     }
 
     @Override
