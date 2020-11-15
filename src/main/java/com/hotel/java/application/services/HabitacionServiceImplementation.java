@@ -49,26 +49,6 @@ public class HabitacionServiceImplementation implements HabitacionService{
     }
 
     @Override
-    public List<HabitacionModel> showHabitacionesByTipo() {
-        habitacionEntities = this.habitacionRepository.findAll((Sort.by("tipo")));
-        List<HabitacionModel> habitacionModels = this.habitacionFactory.habitacionListEntity2Model (habitacionEntities);
-        return habitacionModels;
-    }
-
-    @Override
-    public List<HabitacionModel> showHabitacionesByTipoID(long id) {
-        habitacionEntities = this.habitacionRepository.findAll ();
-        List<HabitacionModel> habitacionModels = this.habitacionFactory.habitacionListEntity2Model (habitacionEntities);
-        List<HabitacionModel> habitaciones = new ArrayList();
-        for (HabitacionModel habitacion : habitacionModels){
-            if (habitacion.getTipoModel ().getId () == id){
-                habitaciones.add (habitacion);
-            }
-        }
-        return habitaciones;
-    }
-
-    @Override
     public HabitacionModel showHabitacionByID(long hab_id) {
         habitacionEntity = this.habitacionRepository.findById (hab_id).orElseThrow(RuntimeException::new);
         HabitacionModel habitacionModel = this.habitacionFactory.habitacionEntity2Model(habitacionEntity);
