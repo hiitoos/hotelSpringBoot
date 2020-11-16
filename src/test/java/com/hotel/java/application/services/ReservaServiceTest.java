@@ -1,12 +1,7 @@
 package com.hotel.java.application.services;
 
 import com.hotel.java.JavaApplication;
-import com.hotel.java.application.domain.entities.ClienteEntity;
-import com.hotel.java.application.domain.entities.HabitacionEntity;
-import com.hotel.java.application.domain.entities.ReservaEntity;
-import com.hotel.java.application.domain.entities.TipoEntity;
-import com.hotel.java.application.domain.factories.ClienteFactory;
-import com.hotel.java.application.domain.factories.HabitacionFactory;
+
 import com.hotel.java.application.domain.factories.ReservaFactory;
 import com.hotel.java.application.models.ClienteModel;
 import com.hotel.java.application.models.HabitacionModel;
@@ -16,20 +11,16 @@ import com.hotel.java.application.repositories.ReservaRepository;
 import org.junit.Assert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.expression.spel.ast.OpAnd;
 
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.InstanceOfAssertFactories.OPTIONAL;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
