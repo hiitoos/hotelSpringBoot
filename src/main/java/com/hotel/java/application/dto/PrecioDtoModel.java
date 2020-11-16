@@ -7,6 +7,12 @@ public class PrecioDtoModel {
     public Date checkIn;
     public Date checkOut;
 
+    public PrecioDtoModel(long id, Date checkIn, Date checkOut) {
+        this.id = id;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+    }
+
     public long getId() {
         return id;
     }
@@ -30,5 +36,6 @@ public class PrecioDtoModel {
     public void setCheckOut(Date checkOut) {
         this.checkOut = checkOut;
     }
+
 
 }
