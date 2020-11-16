@@ -1,0 +1,155 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TemporadaEntity</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.hotel.java.application.domain.entities</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TemporadaEntity (com.hotel.java.application.domain.entities)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TemporadaEntity</td>
+<td class="coverageStat">
+  <span class="percent">
+    11,1%
+  </span>
+  <span class="absValue">
+    (1/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    7,7%
+  </span>
+  <span class="absValue">
+    (1/ 13)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TemporadaEntity$HibernateProxy$1YnXfnCy</td>
+  </tr>
+  <tr>
+    <td class="name">TemporadaEntity$HibernateProxy$AeZ5S1iq</td>
+  </tr>
+  <tr>
+    <td class="name">TemporadaEntity$HibernateProxy$bZhwHj3R</td>
+  </tr>
+  <tr>
+    <td class="name">TemporadaEntity$HibernateProxy$L0JLSnxr</td>
+  </tr>
+  <tr>
+    <td class="name">TemporadaEntity$HibernateProxy$Xolastdh</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    11,1%
+  </span>
+  <span class="absValue">
+    (1/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    7,7%
+  </span>
+  <span class="absValue">
+    (1/ 13)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.hotel.java.application.domain.entities;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import javax.persistence.*;
+<i>4</i>&nbsp;import java.sql.Date;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;@Entity
+<i>7</i>&nbsp;@Table(name=&quot;temporadas&quot;)
+<b class="fc"><i>8</i>&nbsp;public class TemporadaEntity {</b>
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;    @Id
+<i>11</i>&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+<i>12</i>&nbsp;    private long id;
+<i>13</i>&nbsp;    private String nombre;
+<i>14</i>&nbsp;    private Date fecha_ini;
+<i>15</i>&nbsp;    private Date fecha_fin;
+<i>16</i>&nbsp;    private double descuento;
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    public String getNombre() {
+<b class="nc"><i>20</i>&nbsp;        return nombre;</b>
+<i>21</i>&nbsp;    }
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    public void setNombre(String nombre) {
+<b class="nc"><i>24</i>&nbsp;        this.nombre = nombre;</b>
+<b class="nc"><i>25</i>&nbsp;    }</b>
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    public Date getFecha_ini() {
+<b class="nc"><i>28</i>&nbsp;        return fecha_ini;</b>
+<i>29</i>&nbsp;    }
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    public void setFecha_ini(Date fecha_ini) {
+<b class="nc"><i>32</i>&nbsp;        this.fecha_ini = fecha_ini;</b>
+<b class="nc"><i>33</i>&nbsp;    }</b>
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    public Date getFecha_fin() {
+<b class="nc"><i>36</i>&nbsp;        return fecha_fin;</b>
+<i>37</i>&nbsp;    }
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;    public void setFecha_fin(Date fecha_fin) {
+<b class="nc"><i>40</i>&nbsp;        this.fecha_fin = fecha_fin;</b>
+<b class="nc"><i>41</i>&nbsp;    }</b>
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;    public double getDescuento() {
+<b class="nc"><i>44</i>&nbsp;        return descuento;</b>
+<i>45</i>&nbsp;    }
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    public void setDescuento(double descuento) {
+<b class="nc"><i>48</i>&nbsp;        this.descuento = descuento;</b>
+<b class="nc"><i>49</i>&nbsp;    }</b>
+<i>50</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-11-16 11:25</div>
+</div>
+</body>
+</html>

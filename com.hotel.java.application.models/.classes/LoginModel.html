@@ -1,0 +1,170 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: LoginModel</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.hotel.java.application.models</a> ]
+</div>
+
+<h1>Coverage Summary for Class: LoginModel (com.hotel.java.application.models)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LoginModel</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93,3%
+  </span>
+  <span class="absValue">
+    (14/ 15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97,1%
+  </span>
+  <span class="absValue">
+    (33/ 34)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.hotel.java.application.models;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.List;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;public class LoginModel {
+<i>6</i>&nbsp;    private long id;
+<i>7</i>&nbsp;    private String username;
+<i>8</i>&nbsp;    private String password;
+<i>9</i>&nbsp;    private String role;
+<i>10</i>&nbsp;    private boolean enabled;
+<i>11</i>&nbsp;    ClienteModel clienteModel;
+<i>12</i>&nbsp;
+<b class="fc"><i>13</i>&nbsp;    public LoginModel(String username, String password, String role, boolean enabled, ClienteModel clienteModel) {</b>
+<b class="fc"><i>14</i>&nbsp;        setUsername (username);</b>
+<b class="fc"><i>15</i>&nbsp;        setPassword (password);</b>
+<b class="fc"><i>16</i>&nbsp;        setRole (role);</b>
+<b class="fc"><i>17</i>&nbsp;        setEnabled (enabled);</b>
+<b class="fc"><i>18</i>&nbsp;        setClienteModel (clienteModel);</b>
+<b class="fc"><i>19</i>&nbsp;    }</b>
+<i>20</i>&nbsp;
+<b class="fc"><i>21</i>&nbsp;    public LoginModel(long id, String username, String password, String role, boolean enabled, ClienteModel clienteModel) {</b>
+<b class="fc"><i>22</i>&nbsp;        setId(id);</b>
+<b class="fc"><i>23</i>&nbsp;        setUsername (username);</b>
+<b class="fc"><i>24</i>&nbsp;        setPassword (password);</b>
+<b class="fc"><i>25</i>&nbsp;        setRole (role);</b>
+<b class="fc"><i>26</i>&nbsp;        setEnabled (enabled);</b>
+<b class="fc"><i>27</i>&nbsp;        setClienteModel (clienteModel);</b>
+<b class="fc"><i>28</i>&nbsp;    }</b>
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    public long getId() {
+<b class="fc"><i>32</i>&nbsp;        return id;</b>
+<i>33</i>&nbsp;    }
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    public void setId(long id) {
+<b class="fc"><i>36</i>&nbsp;        this.id = id;</b>
+<b class="fc"><i>37</i>&nbsp;    }</b>
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;    public String getUsername() {
+<b class="fc"><i>40</i>&nbsp;        return username;</b>
+<i>41</i>&nbsp;    }
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;    public void setUsername(String username) {
+<b class="fc"><i>44</i>&nbsp;        this.username = username;</b>
+<b class="fc"><i>45</i>&nbsp;    }</b>
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    public String getPassword() {
+<b class="fc"><i>48</i>&nbsp;        return password;</b>
+<i>49</i>&nbsp;    }
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    public void setPassword(String password) {
+<b class="fc"><i>52</i>&nbsp;        this.password = password;</b>
+<b class="fc"><i>53</i>&nbsp;    }</b>
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    public ClienteModel getClienteModel() {
+<b class="fc"><i>56</i>&nbsp;        return clienteModel;</b>
+<i>57</i>&nbsp;    }
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;    public void setClienteModel(ClienteModel clienteModel) {
+<b class="fc"><i>60</i>&nbsp;        this.clienteModel = clienteModel;</b>
+<b class="fc"><i>61</i>&nbsp;    }</b>
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;    public String getRole() {
+<b class="fc"><i>64</i>&nbsp;        return role;</b>
+<i>65</i>&nbsp;    }
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;    public void setRole(String role) {
+<b class="fc"><i>68</i>&nbsp;        this.role = role;</b>
+<b class="fc"><i>69</i>&nbsp;    }</b>
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;    public boolean isEnabled() {
+<b class="fc"><i>72</i>&nbsp;        return enabled;</b>
+<i>73</i>&nbsp;    }
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    public void setEnabled(boolean enabled) {
+<b class="fc"><i>76</i>&nbsp;        this.enabled = enabled;</b>
+<b class="fc"><i>77</i>&nbsp;    }</b>
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    @Override
+<i>80</i>&nbsp;    public String toString() {
+<b class="nc"><i>81</i>&nbsp;        return &quot;LoginModel{&quot; +</b>
+<i>82</i>&nbsp;                &quot;usuario=&#39;&quot; + username + &#39;\&#39;&#39; +
+<i>83</i>&nbsp;                &quot;, password=&#39;&quot; + password + &#39;\&#39;&#39; +
+<i>84</i>&nbsp;                &quot;, clienteModel=&quot; + clienteModel +
+<i>85</i>&nbsp;                &#39;}&#39;;
+<i>86</i>&nbsp;    }
+<i>87</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-11-16 11:25</div>
+</div>
+</body>
+</html>

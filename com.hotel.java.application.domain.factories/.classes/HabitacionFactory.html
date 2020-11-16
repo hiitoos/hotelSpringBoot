@@ -1,0 +1,143 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: HabitacionFactory</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.hotel.java.application.domain.factories</a> ]
+</div>
+
+<h1>Coverage Summary for Class: HabitacionFactory (com.hotel.java.application.domain.factories)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HabitacionFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    73,3%
+  </span>
+  <span class="absValue">
+    (22/ 30)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.hotel.java.application.domain.factories;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;
+<i>4</i>&nbsp;import com.hotel.java.application.domain.entities.HabitacionEntity;
+<i>5</i>&nbsp;import com.hotel.java.application.domain.entities.ReservaEntity;
+<i>6</i>&nbsp;import com.hotel.java.application.models.HabitacionModel;
+<i>7</i>&nbsp;import com.hotel.java.application.models.ReservaModel;
+<i>8</i>&nbsp;import org.springframework.stereotype.Component;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;import java.util.ArrayList;
+<i>11</i>&nbsp;import java.util.List;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;@Component
+<b class="fc"><i>14</i>&nbsp;public class HabitacionFactory {</b>
+<b class="fc"><i>15</i>&nbsp;    TipoFactory tipoFactory = new TipoFactory ();</b>
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    public HabitacionEntity habitacionModel2Entity (HabitacionModel habitacionModel){
+<b class="nc"><i>18</i>&nbsp;        HabitacionEntity habitacionEntity =</b>
+<i>19</i>&nbsp;                new HabitacionEntity (
+<b class="nc"><i>20</i>&nbsp;                        habitacionModel.getId (),</b>
+<b class="nc"><i>21</i>&nbsp;                        habitacionModel.getCodigo (),</b>
+<b class="nc"><i>22</i>&nbsp;                        habitacionModel.getDescripcion (),</b>
+<b class="nc"><i>23</i>&nbsp;                        habitacionModel.getPrecio (),</b>
+<b class="nc"><i>24</i>&nbsp;                        tipoFactory.tipoModel2Entity(habitacionModel.getTipoModel ()),</b>
+<b class="nc"><i>25</i>&nbsp;                        habitacionModel.getNumpersonas()</b>
+<i>26</i>&nbsp;                );
+<b class="nc"><i>27</i>&nbsp;        return habitacionEntity;</b>
+<i>28</i>&nbsp;    }
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    public HabitacionModel habitacionEntity2Model (HabitacionEntity habitacionEntity){
+<b class="fc"><i>31</i>&nbsp;        HabitacionModel habitacionModel =</b>
+<i>32</i>&nbsp;                new HabitacionModel (
+<b class="fc"><i>33</i>&nbsp;                        habitacionEntity.getId (),</b>
+<b class="fc"><i>34</i>&nbsp;                        habitacionEntity.getCodigo (),</b>
+<b class="fc"><i>35</i>&nbsp;                        habitacionEntity.getDescripcion (),</b>
+<b class="fc"><i>36</i>&nbsp;                        habitacionEntity.getPrecio (),</b>
+<b class="fc"><i>37</i>&nbsp;                        tipoFactory.tipoEntity2Model(habitacionEntity.getTipo ()),</b>
+<b class="fc"><i>38</i>&nbsp;                        habitacionEntity.getNumpersonas()</b>
+<i>39</i>&nbsp;                );
+<b class="fc"><i>40</i>&nbsp;        return habitacionModel;</b>
+<i>41</i>&nbsp;    }
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;    public List&lt;HabitacionModel&gt; habitacionListEntity2Model(List&lt;HabitacionEntity&gt; habitacionEntities){
+<b class="fc"><i>44</i>&nbsp;        List&lt;HabitacionModel&gt; habitacionModels = new ArrayList&lt;&gt; ();</b>
+<b class="fc"><i>45</i>&nbsp;        for (HabitacionEntity habitacion : habitacionEntities){</b>
+<b class="fc"><i>46</i>&nbsp;            HabitacionModel habitacionModel =</b>
+<i>47</i>&nbsp;                    new HabitacionModel (
+<b class="fc"><i>48</i>&nbsp;                            habitacion.getId (),</b>
+<b class="fc"><i>49</i>&nbsp;                            habitacion.getCodigo (),</b>
+<b class="fc"><i>50</i>&nbsp;                            habitacion.getDescripcion (),</b>
+<b class="fc"><i>51</i>&nbsp;                            habitacion.getPrecio (),</b>
+<b class="fc"><i>52</i>&nbsp;                            tipoFactory.tipoEntity2Model (habitacion.getTipo ()),</b>
+<b class="fc"><i>53</i>&nbsp;                            habitacion.getNumpersonas()</b>
+<i>54</i>&nbsp;                    );
+<b class="fc"><i>55</i>&nbsp;            habitacionModels.add (habitacionModel);</b>
+<b class="fc"><i>56</i>&nbsp;        }</b>
+<b class="fc"><i>57</i>&nbsp;        return habitacionModels;</b>
+<i>58</i>&nbsp;    }
+<i>59</i>&nbsp;
+<i>60</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-11-16 11:25</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,140 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: HabitacionServiceImplementation</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.hotel.java.application.services</a> ]
+</div>
+
+<h1>Coverage Summary for Class: HabitacionServiceImplementation (com.hotel.java.application.services)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HabitacionServiceImplementation</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (18/ 18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.hotel.java.application.services;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.hotel.java.application.domain.entities.HabitacionEntity;
+<i>4</i>&nbsp;//import com.hotel.java.application.domain.factories.ClienteFactory;
+<i>5</i>&nbsp;import com.hotel.java.application.domain.factories.HabitacionFactory;
+<i>6</i>&nbsp;//import com.hotel.java.application.domain.factories.;
+<i>7</i>&nbsp;import com.hotel.java.application.models.HabitacionModel;
+<i>8</i>&nbsp;import com.hotel.java.application.repositories.HabitacionRepository;
+<i>9</i>&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+<i>10</i>&nbsp;import org.springframework.data.domain.Sort;
+<i>11</i>&nbsp;import org.springframework.stereotype.Service;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;import java.util.ArrayList;
+<i>14</i>&nbsp;import java.util.List;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;@Service
+<i>17</i>&nbsp;public class HabitacionServiceImplementation implements HabitacionService{
+<i>18</i>&nbsp;    private final HabitacionRepository habitacionRepository;
+<i>19</i>&nbsp;    private final HabitacionFactory habitacionFactory ;
+<i>20</i>&nbsp;    private List&lt;HabitacionEntity&gt; habitacionEntities;
+<i>21</i>&nbsp;    private List&lt;HabitacionModel&gt; habitacionModels;
+<i>22</i>&nbsp;    private HabitacionEntity habitacionEntity;
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    @Autowired
+<i>25</i>&nbsp;    public HabitacionServiceImplementation(HabitacionRepository habitacionRepository,
+<b class="fc"><i>26</i>&nbsp;                                        HabitacionFactory habitacionFactory) {</b>
+<b class="fc"><i>27</i>&nbsp;        this.habitacionRepository = habitacionRepository;</b>
+<b class="fc"><i>28</i>&nbsp;        this.habitacionFactory = habitacionFactory;</b>
+<b class="fc"><i>29</i>&nbsp;    }</b>
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    @Override
+<i>32</i>&nbsp;    public List&lt;HabitacionModel&gt; showAllHabitaciones() {
+<b class="fc"><i>33</i>&nbsp;        habitacionEntities = this.habitacionRepository.findAll ();</b>
+<b class="fc"><i>34</i>&nbsp;        habitacionModels = this.habitacionFactory.habitacionListEntity2Model(habitacionEntities);</b>
+<b class="fc"><i>35</i>&nbsp;        return habitacionModels;</b>
+<i>36</i>&nbsp;    }
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    @Override
+<i>39</i>&nbsp;    public List&lt;HabitacionModel&gt; showHabitacionesByGuest(int numGuest) {
+<b class="fc"><i>40</i>&nbsp;        habitacionEntities = this.habitacionRepository.findAll ();</b>
+<b class="fc"><i>41</i>&nbsp;        habitacionModels = this.habitacionFactory.habitacionListEntity2Model(habitacionEntities);</b>
+<b class="fc"><i>42</i>&nbsp;        List&lt;HabitacionModel&gt; habitaciones = new ArrayList();</b>
+<b class="fc"><i>43</i>&nbsp;        for (HabitacionModel habitacion : habitacionModels){</b>
+<b class="fc"><i>44</i>&nbsp;            if(habitacion.getNumpersonas ()&gt;=numGuest){</b>
+<b class="fc"><i>45</i>&nbsp;                habitaciones.add (habitacion);</b>
+<i>46</i>&nbsp;            }
+<b class="fc"><i>47</i>&nbsp;        }</b>
+<b class="fc"><i>48</i>&nbsp;        return habitaciones;</b>
+<i>49</i>&nbsp;    }
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    @Override
+<i>52</i>&nbsp;    public HabitacionModel showHabitacionByID(long hab_id) {
+<b class="fc"><i>53</i>&nbsp;        habitacionEntity = this.habitacionRepository.findById (hab_id).orElseThrow(RuntimeException::new);</b>
+<b class="fc"><i>54</i>&nbsp;        HabitacionModel habitacionModel = this.habitacionFactory.habitacionEntity2Model(habitacionEntity);</b>
+<b class="fc"><i>55</i>&nbsp;        return habitacionModel;</b>
+<i>56</i>&nbsp;    }
+<i>57</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-11-16 11:25</div>
+</div>
+</body>
+</html>

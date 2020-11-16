@@ -1,0 +1,64 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ReservaRepository</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.hotel.java.application.repositories</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ReservaRepository (com.hotel.java.application.repositories)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ReservaRepository</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.hotel.java.application.repositories;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.hotel.java.application.domain.entities.ReservaEntity;
+<i>4</i>&nbsp;import org.springframework.data.jpa.repository.JpaRepository;
+<i>5</i>&nbsp;import org.springframework.data.jpa.repository.Query;
+<i>6</i>&nbsp;import org.springframework.data.repository.CrudRepository;
+<i>7</i>&nbsp;import org.springframework.data.repository.query.Param;
+<i>8</i>&nbsp;import org.springframework.stereotype.Repository;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;import java.sql.Date;
+<i>11</i>&nbsp;import java.util.List;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;@Repository
+<i>14</i>&nbsp;public interface ReservaRepository extends CrudRepository&lt;ReservaEntity, Long&gt; {
+<i>15</i>&nbsp;    @Query(value = &quot;select e.fechaIn, e.fechaOut  from ReservaEntity e where  e.fechaOut &gt; current_date AND e.habitacion.id = :id&quot;)
+<i>16</i>&nbsp;    List&lt;Date[]&gt; dateBookingsByRoom(@Param(&quot;id&quot;) long id);
+<i>17</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-11-16 11:25</div>
+</div>
+</body>
+</html>

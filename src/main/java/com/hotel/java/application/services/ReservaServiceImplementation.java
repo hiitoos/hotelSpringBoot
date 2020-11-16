@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -47,14 +48,8 @@ public class ReservaServiceImplementation implements ReservaService {
     @Override
     public long operateReserva(ReservaModel reservaModel, String modo) {
         long id=0;
-        ReservaEntity reservaEntity = new ReservaEntity (
-            reservaModel.getId (),
-                reservaModel.getFechaIn (),
-                reservaModel.getFechaOut (),
-                reservaModel.getPrecioTotal (),
-                this.clienteFactory.clienteModel2Entity (reservaModel.getCliente ()),
-                this.habitacionFactory.habitacionModel2Entity (reservaModel.getHabitacion ())
-        );
+
+        ReservaEntity reservaEntity = this.reservaFactory.reservaModel2Entity (reservaModel);
         switch (modo){
             case "new":
             case "update": {

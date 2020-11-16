@@ -1,7 +1,10 @@
 package com.hotel.java.application.services;
 
 import com.hotel.java.JavaApplication;
+import com.hotel.java.application.domain.entities.TipoEntity;
+import com.hotel.java.application.domain.factories.TipoFactory;
 import com.hotel.java.application.models.TipoModel;
+import com.hotel.java.application.repositories.TipoRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,40 +22,36 @@ import static org.mockito.Mockito.when;
 @AutoConfigureMockMvc
 public class TipoServiceTest {
 
-    @MockBean
+    @Autowired
     private TipoService tipoService;
+
+    @Autowired
+    private TipoFactory tipoFactory;
+
+    @MockBean
+    private TipoRepository tipoRepository;
 
     @Test
     @DisplayName ("Muestra todos los tipos en forma de lista")
     public void ShouldReturnAllTypesAsaList(){
-        TipoModel tipo1 = new TipoModel (
+        TipoEntity tipo1 = new TipoEntity (
                 1,
                 "tipo1",
                 "desctipo1"
         );
 
-        TipoModel tipo2 = new TipoModel (
+        TipoEntity tipo2 = new TipoEntity (
                 2,
                 "tipo2",
                 "desctipo2"
         );
 
-        List<TipoModel> tipos = new ArrayList<> ();
+        List<TipoEntity> tipos = new ArrayList<> ();
         tipos.add (tipo1);
         tipos.add (tipo2);
 
-        when(tipoService.showAllTipos ()).thenReturn (tipos);
-        assertThat(tipoService.showAllTipos ()).isEqualTo (tipos);
+        when(tipoRepository.findAll ()).thenReturn (tipos);
+        assertThat(tipoService.showAllTipos ().size ()).isEqualTo (tipoFactory.tipoListEntity2Model (tipos).size ());
     }
 
-    //This test will pass if we have data on BBDD
-
-    @Autowired
-    private TipoService tipos;
-
-    @Test
-    @DisplayName ("Devuelve una lista de tipos")
-    public void ShouldReturnAnArray(){
-        assertThat (tipos.showAllTipos ()).hasOnlyElementsOfType (TipoModel.class);
-    }
 }

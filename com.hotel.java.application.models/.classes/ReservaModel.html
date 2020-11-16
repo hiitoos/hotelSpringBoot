@@ -1,0 +1,173 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ReservaModel</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.hotel.java.application.models</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ReservaModel (com.hotel.java.application.models)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ReservaModel</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87,5%
+  </span>
+  <span class="absValue">
+    (14/ 16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91,7%
+  </span>
+  <span class="absValue">
+    (33/ 36)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.hotel.java.application.models;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;public class ReservaModel {
+<i>4</i>&nbsp;    private long id;
+<i>5</i>&nbsp;    private java.sql.Date fechaIn;
+<i>6</i>&nbsp;    private java.sql.Date fechaOut;
+<i>7</i>&nbsp;    private float precioTotal;
+<i>8</i>&nbsp;    ClienteModel cliente;
+<i>9</i>&nbsp;    HabitacionModel habitacion;
+<i>10</i>&nbsp;
+<b class="fc"><i>11</i>&nbsp;    public ReservaModel(java.sql.Date fechaIn, java.sql.Date fechaOut, float precioTotal, ClienteModel cliente, HabitacionModel habitacion) {</b>
+<b class="fc"><i>12</i>&nbsp;        setFechaIn (fechaIn);</b>
+<b class="fc"><i>13</i>&nbsp;        setFechaOut (fechaOut);</b>
+<b class="fc"><i>14</i>&nbsp;        setPrecioTotal (precioTotal);</b>
+<b class="fc"><i>15</i>&nbsp;        setCliente (cliente);</b>
+<b class="fc"><i>16</i>&nbsp;        setHabitacion (habitacion);</b>
+<b class="fc"><i>17</i>&nbsp;    }</b>
+<i>18</i>&nbsp;
+<b class="fc"><i>19</i>&nbsp;    public ReservaModel(long id, java.sql.Date fechaIn, java.sql.Date fechaOut, float precioTotal, ClienteModel cliente, HabitacionModel habitacion) {</b>
+<b class="fc"><i>20</i>&nbsp;        setId (id);</b>
+<b class="fc"><i>21</i>&nbsp;        setFechaIn (fechaIn);</b>
+<b class="fc"><i>22</i>&nbsp;        setFechaOut (fechaOut);</b>
+<b class="fc"><i>23</i>&nbsp;        setPrecioTotal (precioTotal);</b>
+<b class="fc"><i>24</i>&nbsp;        setCliente (cliente);</b>
+<b class="fc"><i>25</i>&nbsp;        setHabitacion (habitacion);</b>
+<b class="fc"><i>26</i>&nbsp;    }</b>
+<i>27</i>&nbsp;
+<b class="nc"><i>28</i>&nbsp;    public ReservaModel() {</b>
+<b class="nc"><i>29</i>&nbsp;    }</b>
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    public long getId() {
+<b class="fc"><i>32</i>&nbsp;        return id;</b>
+<i>33</i>&nbsp;    }
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    public void setId(long id) {
+<b class="fc"><i>36</i>&nbsp;        this.id = id;</b>
+<b class="fc"><i>37</i>&nbsp;    }</b>
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;    public java.sql.Date getFechaIn() {
+<b class="fc"><i>40</i>&nbsp;        return fechaIn;</b>
+<i>41</i>&nbsp;    }
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;    public void setFechaIn(java.sql.Date fechaIn) {
+<b class="fc"><i>44</i>&nbsp;        this.fechaIn = fechaIn;</b>
+<b class="fc"><i>45</i>&nbsp;    }</b>
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    public java.sql.Date getFechaOut() {
+<b class="fc"><i>48</i>&nbsp;        return fechaOut;</b>
+<i>49</i>&nbsp;    }
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    public void setFechaOut(java.sql.Date fechaOut) {
+<b class="fc"><i>52</i>&nbsp;        this.fechaOut = fechaOut;</b>
+<b class="fc"><i>53</i>&nbsp;    }</b>
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    public float getPrecioTotal() {
+<b class="fc"><i>56</i>&nbsp;        return precioTotal;</b>
+<i>57</i>&nbsp;    }
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;    public void setPrecioTotal(float precioTotal) {
+<b class="fc"><i>60</i>&nbsp;        this.precioTotal = precioTotal;</b>
+<b class="fc"><i>61</i>&nbsp;    }</b>
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;    public ClienteModel getCliente() {
+<b class="fc"><i>64</i>&nbsp;        return cliente;</b>
+<i>65</i>&nbsp;    }
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;    public void setCliente(ClienteModel clienteModel) {
+<b class="fc"><i>68</i>&nbsp;        this.cliente = clienteModel;</b>
+<b class="fc"><i>69</i>&nbsp;    }</b>
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;    public HabitacionModel getHabitacion() {
+<b class="fc"><i>72</i>&nbsp;        return habitacion;</b>
+<i>73</i>&nbsp;    }
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    public void setHabitacion(HabitacionModel habitacion) {
+<b class="fc"><i>76</i>&nbsp;        this.habitacion = habitacion;</b>
+<b class="fc"><i>77</i>&nbsp;    }</b>
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    @Override
+<i>80</i>&nbsp;    public String toString() {
+<b class="nc"><i>81</i>&nbsp;        return &quot;ReservaModel{&quot; +</b>
+<i>82</i>&nbsp;                &quot;id=&quot; + id +
+<i>83</i>&nbsp;                &quot;, fechaIn=&quot; + fechaIn +
+<i>84</i>&nbsp;                &quot;, fechaOut=&quot; + fechaOut +
+<i>85</i>&nbsp;                &quot;, precioTotal=&quot; + precioTotal +
+<i>86</i>&nbsp;                &quot;, cliente=&quot; + cliente +
+<i>87</i>&nbsp;                &quot;, habitacion=&quot; + habitacion +
+<i>88</i>&nbsp;                &#39;}&#39;;
+<i>89</i>&nbsp;    }
+<i>90</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-11-16 11:25</div>
+</div>
+</body>
+</html>

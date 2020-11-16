@@ -1,0 +1,123 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: LoginFactory</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">com.hotel.java.application.domain.factories</a> ]
+</div>
+
+<h1>Coverage Summary for Class: LoginFactory (com.hotel.java.application.domain.factories)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LoginFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (18/ 18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package com.hotel.java.application.domain.factories;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.hotel.java.application.domain.entities.ClienteEntity;
+<i>4</i>&nbsp;import com.hotel.java.application.domain.entities.LoginEntity;
+<i>5</i>&nbsp;import com.hotel.java.application.models.ClienteModel;
+<i>6</i>&nbsp;import com.hotel.java.application.models.LoginModel;
+<i>7</i>&nbsp;import org.springframework.stereotype.Component;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;@Component
+<b class="fc"><i>10</i>&nbsp;public class LoginFactory {</b>
+<b class="fc"><i>11</i>&nbsp;    private ClienteFactory clienteFactory = new ClienteFactory ();</b>
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    public LoginEntity loginModel2Entity (LoginModel loginModel){
+<b class="fc"><i>16</i>&nbsp;        LoginEntity loginEntity = new LoginEntity (</b>
+<b class="fc"><i>17</i>&nbsp;                     loginModel.getId (),</b>
+<b class="fc"><i>18</i>&nbsp;                     loginModel.getUsername (),</b>
+<b class="fc"><i>19</i>&nbsp;                     loginModel.getPassword (),</b>
+<b class="fc"><i>20</i>&nbsp;                     loginModel.getRole (),</b>
+<b class="fc"><i>21</i>&nbsp;                     loginModel.isEnabled (),</b>
+<b class="fc"><i>22</i>&nbsp;                     clienteFactory.clienteModel2Entity (loginModel.getClienteModel ())</b>
+<i>23</i>&nbsp;             );
+<b class="fc"><i>24</i>&nbsp;        return loginEntity;</b>
+<i>25</i>&nbsp;    }
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    public LoginModel loginEntity2Model (LoginEntity loginEntity){
+<b class="fc"><i>29</i>&nbsp;        LoginModel loginModel = new LoginModel (</b>
+<b class="fc"><i>30</i>&nbsp;                loginEntity.getId (),</b>
+<b class="fc"><i>31</i>&nbsp;                loginEntity.getUsername (),</b>
+<b class="fc"><i>32</i>&nbsp;                loginEntity.getPassword (),</b>
+<b class="fc"><i>33</i>&nbsp;                loginEntity.getRole (),</b>
+<b class="fc"><i>34</i>&nbsp;                loginEntity.isEnabled (),</b>
+<b class="fc"><i>35</i>&nbsp;                clienteFactory.clienteEntity2Model (loginEntity.getClienteEntity ())</b>
+<i>36</i>&nbsp;        );
+<b class="fc"><i>37</i>&nbsp;        return loginModel;</b>
+<i>38</i>&nbsp;    }
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-11-16 11:25</div>
+</div>
+</body>
+</html>

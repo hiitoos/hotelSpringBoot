@@ -13,7 +13,7 @@ public class ReservaEntity implements Serializable {
     private java.sql.Date fechaOut;
     private float precioTotal;
 
-    @ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL )
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="cliente_id")
     private ClienteEntity cliente;
 

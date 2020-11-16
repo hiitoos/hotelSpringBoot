@@ -4,6 +4,7 @@ import com.hotel.java.application.models.ReservaModel;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 public interface ReservaService {
     List<ReservaModel> listReservas();

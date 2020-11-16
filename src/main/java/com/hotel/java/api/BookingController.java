@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000")
 
@@ -32,7 +33,7 @@ public class BookingController {
 
     @GetMapping("showBookingById/{id}")
     public ReservaModel showBooking(@PathVariable ("id") long id){
-        ReservaModel reservaModel = this.reservaService.listReservaById (id);
+       ReservaModel reservaModel = this.reservaService.listReservaById (id);
         return reservaModel;
     }
 
