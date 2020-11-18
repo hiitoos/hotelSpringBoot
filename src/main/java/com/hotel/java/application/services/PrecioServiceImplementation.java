@@ -35,9 +35,9 @@ public class PrecioServiceImplementation implements PrecioService{
 
         if (descuentoFi == descuentoFo)
             return descuentoFi;
-        if ((descuentoFi < descuentoFo)||(descuentoFo>descuentoFi))
+        if (Math.abs (descuentoFi) < Math.abs (descuentoFo))
             return (descuentoFo/2);
-        return (descuentoFo/2);
+        return (descuentoFi/2);
     }
 
 }
