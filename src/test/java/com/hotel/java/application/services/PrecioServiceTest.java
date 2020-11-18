@@ -37,7 +37,7 @@ public class PrecioServiceTest {
     }
 
     @Test
-@DisplayName ("Devuelve 0.10 como descuento con 16 a 19 dias")
+    @DisplayName ("Devuelve 0.10 como descuento con 16 a 19 dias")
     public void ShouldReturn010WhenInput16asDays(){
         assertThat (precioService.calculaDescuento (16)).isEqualTo (0.10);
     }
@@ -50,7 +50,7 @@ public class PrecioServiceTest {
 
     @Test
     @DisplayName ("Devuelve 0.08 como descuento por temporada baja")
-    public void ShouldReturn008WhenLowSeason(){
+    public void ShouldReturn008WhenLowSeason() throws Exception {
         when(temporadaRepository.descuento (Date.valueOf ("2020-11-19"))).thenReturn (0.08f);
         when(temporadaRepository.descuento (Date.valueOf ("2020-11-21"))).thenReturn (0.08f);
         assertThat (precioService.calculaTemporada (Date.valueOf ("2020-11-19"), Date.valueOf ("2020-11-21"))).isEqualTo (0.08f);
@@ -59,7 +59,7 @@ public class PrecioServiceTest {
 
     @Test
     @DisplayName ("Devuelve 0.12 como incremento por temporada alta")
-    public void ShouldReturn010WhenHighSeason(){
+    public void ShouldReturn010WhenHighSeason() throws Exception {
         when(temporadaRepository.descuento (Date.valueOf ("2020-12-16"))).thenReturn (-0.12f);
         when(temporadaRepository.descuento (Date.valueOf ("2020-12-19"))).thenReturn (-0.12f);
         assertThat (precioService.calculaTemporada (Date.valueOf ("2020-12-16"), Date.valueOf ("2020-12-19"))).isEqualTo (-0.12f);
@@ -67,15 +67,14 @@ public class PrecioServiceTest {
 
     @Test
     @DisplayName ("Devuelve 0 como descuento por estar fuera de ninguna temporada")
-    public void ShouldReturn0WhenNoSeason(){
-        when(temporadaRepository.descuento (Date.valueOf ("2021-01-19"))).thenReturn (0.00f);
-        when(temporadaRepository.descuento (Date.valueOf ("2021-01-21"))).thenReturn (0.00f);
+    public void ShouldReturn0WhenNoSeason() throws Exception {
+        when(temporadaRepository.descuento (Date.valueOf ("2021-01-19"))).thenThrow (new org.springframework.aop.AopInvocationException (""));
         assertThat (precioService.calculaTemporada (Date.valueOf ("2021-02-19"), Date.valueOf ("2021-02-21"))).isEqualTo (0.00f);
     }
 
     @Test
     @DisplayName ("Devuelve 0.06 como incremento por estar entre fuera de temporada y temporada alta")
-    public void ShouldReturn006WhenCheckInIsOutOfSeasonAndCheckOutIsHighSeason(){
+    public void ShouldReturn006WhenCheckInIsOutOfSeasonAndCheckOutIsHighSeason() throws Exception {
         when(temporadaRepository.descuento (Date.valueOf ("2020-12-12"))).thenReturn (0.00f);
         when(temporadaRepository.descuento (Date.valueOf ("2020-12-15"))).thenReturn (-0.12f);
         assertThat (precioService.calculaTemporada (Date.valueOf ("2020-12-12"), Date.valueOf ("2020-12-15"))).isEqualTo (-0.06f);
@@ -83,7 +82,7 @@ public class PrecioServiceTest {
 
     @Test
     @DisplayName ("Devuelve 0.06 como incremento por estar entre temporada alta y fuera de temporada")
-    public void ShouldReturn006WhenCheckInHighSeasonAndCheckOutIsNoSeason(){
+    public void ShouldReturn006WhenCheckInHighSeasonAndCheckOutIsNoSeason() throws Exception {
         when(temporadaRepository.descuento (Date.valueOf ("2021-01-08"))).thenReturn (-0.12f);
         when(temporadaRepository.descuento (Date.valueOf ("2021-01-12"))).thenReturn (0.00f);
         assertThat (precioService.calculaTemporada (Date.valueOf ("2021-01-08"), Date.valueOf ("2021-01-12"))).isEqualTo (-0.06f);

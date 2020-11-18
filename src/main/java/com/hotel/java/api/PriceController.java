@@ -22,7 +22,7 @@ public class PriceController {
     private PrecioService precioService;
 
     @PostMapping("calculaPrecio")
-    public double calculaPrecio (@RequestBody PrecioDtoModel datosPrecio){
+    public double calculaPrecio (@RequestBody PrecioDtoModel datosPrecio) throws Exception {
         double precioHab = this.habitacionService.showHabitacionByID (datosPrecio.getId ()).getPrecio ();
         long dias = this.dateService.getDaysBetweenTwoDates (datosPrecio.checkIn, datosPrecio.checkOut);
         double descTemporada = this.precioService.calculaTemporada (datosPrecio.checkIn, datosPrecio.checkOut);

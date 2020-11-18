@@ -1,6 +1,7 @@
 package com.hotel.java.application.services;
 
 import com.hotel.java.application.repositories.TemporadaRepository;
+import org.springframework.aop.AopInvocationException;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -23,15 +24,13 @@ public class PrecioServiceImplementation implements PrecioService{
     }
 
     @Override
-    public float calculaTemporada(Date in, Date out) {
-        float descuentoFi = 0;
-        float descuentoFo = 0;
+    public float calculaTemporada(Date in, Date out){
+        float descuentoFi=0;
+        float descuentoFo=0;
         try {
             descuentoFi = this.temporadaRepository.descuento (in);
             descuentoFo = this.temporadaRepository.descuento (out);
-        } catch(Exception e){
-            return 0;
-        }
+        } catch(AopInvocationException e){ }
 
         if (descuentoFi == descuentoFo)
             return descuentoFi;
