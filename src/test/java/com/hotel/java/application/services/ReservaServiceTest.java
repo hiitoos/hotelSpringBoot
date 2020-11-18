@@ -15,7 +15,6 @@ import com.hotel.java.application.repositories.ReservaRepository;
 import org.junit.Assert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,7 +23,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -77,7 +75,7 @@ public class ReservaServiceTest {
         assertThat(reservaService.listReservas ()).isEqualTo (reservas);
     }
 
-   /* @Test
+    @Test
     @DisplayName ("Devuelve la reserva1 cuando se busca con id 1")
     public void ShouldReturnReserva1WhenSearchByItsID(){
         ReservaEntity reserva1 = new ReservaEntity (
@@ -98,10 +96,11 @@ public class ReservaServiceTest {
                 new HabitacionModel (1, "HabCod", "DescHab", 100, new TipoModel (1, "tipo", "tipo"), 3)
 
         );
-        when (reservaRepository.findById (1L)).thenReturn (Optional.of (reserva1));
+        when (reservaRepository.findById (1L)).thenReturn (java.util.Optional.of (reserva1));
+        when (reservaFactory.reservaEntity2Model(reserva1)).thenReturn(reserva);
         assertThat (reservaService.listReservaById (1)).isEqualTo (reserva);
 
-    }*/
+    }
 
     @Test
     @DisplayName ("Devuelve una lista con los días que esta ocupada una habitación según ID de reserva")

@@ -26,7 +26,8 @@ public class ClienteServiceImplementation implements ClienteService{
     public long createCliente(ClienteModel cliente, LoginModel login) {
         clienteEntity = this.clienteFactory.clienteModel2Entity (cliente);
 
-        long idClient = this.clienteRepository.save(clienteEntity).getId ();
+        ClienteEntity clienteE  = this.clienteRepository.save(clienteEntity);
+        long idClient = clienteE.getId ();
         this.clienteRepository.flush();
         cliente.setId (idClient);
         clienteEntity.setId (idClient);
